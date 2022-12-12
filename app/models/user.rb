@@ -10,7 +10,15 @@ class User < ApplicationRecord
 
   validates :username, presence: true
 
-  def like!(post)
-    likes << Like.new(post: post)
+  def like!(likeable)
+    likes << Like.new(likeable_id: likeable.id, likeable_type: likeable.class)
+  end
+
+  def unlike!(likeable)
+    likes.where(likeable_id: likeable.id, likeable_type: likeable.class.to_s).delete_all
+  end
+
+  def likes?(likeable)
+    likes.find_by(likeable: likeable) ? true : false
   end
 end

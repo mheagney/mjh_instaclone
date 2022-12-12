@@ -2,5 +2,16 @@
   <div class="comment">
     <span class="comment-author"><%= comment.user.username %></span>
     <%= comment.body %>
+    <div class="comment-actions">
+      <% if current_user %>
+        <%= turbo_frame_tag "#{dom_id(comment)}-likebutton" do %>
+          <% if current_user.likes?(comment) %>
+            <%= render partial: "likes/unlike_button", locals: {likeable: comment}%>
+          <% else %>
+            <%= render partial: "likes/like_button", locals: {likeable: comment}%>
+          <% end %>
+        <% end %>
+      <% end%>
+    </div>
   </div>
 <% end %>

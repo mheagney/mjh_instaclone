@@ -1,11 +1,22 @@
 class LikesController < ApplicationController
+  before_action :find_likeable
+
   def create
-    @post = Post.find(params[:post_id])
-    current_user.like!(@post)
+    current_user.like!(@likeable)
   end
 
   def destroy
-    @post = current_user.posts.find_by(id: params[:post_id])
-    current_user.likes.where(post_id: @post.id).delete_all
+    current_user.unlike!(@likeable)
+  end
+
+  private
+
+  def find_likeable
+    @likeable_class = likeable_params[:likeable_type].capitalize.constantize
+    @likeable = @likeable_class.find(likeable_params[:id].to_i)
+  end
+
+  def likeable_params
+    params.permit(:id, :likeable_type)
   end
 end
