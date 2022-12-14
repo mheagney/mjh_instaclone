@@ -19,6 +19,6 @@ class User < ApplicationRecord
   end
 
   def likes?(likeable)
-    likes.find_by(likeable: likeable) ? true : false
+    likes.find_by(likeable_id: likeable.id, likeable_type: likeable.class.to_s) ? true : false
   end
 end

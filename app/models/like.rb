@@ -7,7 +7,7 @@ class Like < ApplicationRecord
   private
 
   def valid_class
-    if !["Post", "Comment"].include?(:likeable_type)
+    unless !["Post", "Comment"].include?(:likeable_type)
       errors.add(:likeable_type, :invalid_class)
     end
   end
