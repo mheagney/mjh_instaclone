@@ -1,1 +1,1 @@
-<%= button_to "", like_path(likeable), class: "post-actions-unlike", params: {likeable_type: likeable.class}, method: :delete %>
+<%= button_to "", like_path(liked), params: {like: {likeable_type: liked.class.to_s}}, class: "post-actions-unlike", method: :delete %>

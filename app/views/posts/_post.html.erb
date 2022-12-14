@@ -10,9 +10,9 @@
     <% if current_user %>
       <%= turbo_frame_tag "#{dom_id(post)}-likebutton" do %>
         <% if current_user.likes?(post) %>
-          <%= render partial: "likes/unlike_button", locals: {likeable: post}%>
+          <%= render partial: "likes/unlike_button", locals: {liked: post}%>
         <% else %>
-          <%= render partial: "likes/like_button", locals: {likeable: post}%>
+          <%= render partial: "likes/like_button", locals: {liked: post}%>
         <% end %>
       <% end %>
     <% end%>
